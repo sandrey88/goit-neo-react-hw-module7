@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 import { selectContacts } from '../../redux/contactsSlice';
 import css from './ContactForm.module.css';
 
@@ -35,7 +34,7 @@ const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact({ id: nanoid(), ...values }));
+    dispatch(addContact(values));
     resetForm();
   };
 
@@ -58,9 +57,9 @@ const ContactForm = () => {
 
         <div className={css.fieldWrapper}>
           <Field
-            type="tel"
+            type="text"
             name="number"
-            placeholder="Phone number"
+            placeholder="Number"
             className={css.input}
           />
           <ErrorMessage name="number" component={ErrorMessageWrapper} />
